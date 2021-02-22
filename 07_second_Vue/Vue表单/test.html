@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <!-- 
+        input和textarea元素可以使用v-model进行双向绑定;
+        复选框：复选框如果是一个为逻辑值，如果是多个则绑定到同一个数组;
+     -->
+     <!-- 
+         修饰符：
+            .lazy: 在默认情况下， v-model 在 input 事件中同步输入框的值与数据，但你可以添加一个修饰符 lazy ，从而转变为在 change 事件中同步;
+            .number: 如果想自动将用户的输入值转为 Number 类型（如果原值的转换结果为 NaN 则返回原值），可以添加一个修饰符 number 给 v-model 来处理输入值,这通常很有用，因为在 type="number" 时 HTML 中输入的值也总是会返回字符串类型;
+            .trim: 如果要自动过滤用户输入的首尾空格，可以添加 trim 修饰符到 v-model 上过滤输入;
+      -->
+</head>
+
+<body>
+    <div id="app">
+        <h1>文本框</h1>
+        <h3>{{ message }}</h3>
+        <input type="text" v-model="message"><hr>
+
+        <!-- 复选框如果是一个为逻辑值，如果是多个则绑定到同一个数组! -->
+        <h1>单个复选框</h1>
+        <input type="checkbox" id="check" v-model="checked">
+        <label for="check">{{ checked }}</label><hr>
+
+        <h1>多个复选框</h1>
+        <input type="checkbox" id="runoob" value="Runoob" v-model="checkedNames">
+        <label for="runoob">Runoob</label>
+        <input type="checkbox" id="google" value="Google" v-model="checkedNames">
+        <label for="google">Google</label>
+        <input type="checkbox" id="taobao" value="Taobao" v-model="checkedNames">
+        <label for="taobao">taobao</label>
+        <br><span>选择的值为: {{ checkedNames }}</span><hr>
+
+        <h1>单选按钮</h1>
+        <input type="radio" id="radio1" value="Runoob" v-model="picked">
+        <label for="radio1">Runoob</label>
+        <br>
+        <input type="radio" id="radio2" value="Google" v-model="picked">
+        <label for="radio2">Google</label>
+        <br><span>选中值为: {{ picked }}</span><hr>
+        
+        <h1>下拉列表</h1>
+        <select v-model="selected" name="fruit">
+            <option value="">选择一个网站</option>
+            <option value="www.runoob.com">Runoob</option>
+            <option value="www.google.com">Google</option>
+        </select>
+        <div id="output">
+            选择的网站是: {{selected}}
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                message: "HelloWorld",
+                checked: false,
+                checkedNames: [],
+                picked: 'Runoob',
+                selected: '',
+            },
+            methods: {
+            },
+            computed: {
+            },
+            watch: {
+            }
+        })
+    </script>
+</body>
+
+</html>

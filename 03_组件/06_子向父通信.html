@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <div id="ok">
+        <div :style='{fontSize: size + "px"}'>{{ str }}</div>
+        <button :style='{fontSize: size + "px"}'>我也可以</button>
+
+        <!-- 父组件可以在使用子组件的地方直接用 v-on 来监听子组件触发的事件 -->
+        <!-- <item :attr='Attr' v-on:enlarge-text='handle'></item>                    -->
+        <!-- 这是子组件, 点击它将会触发enlarge-text这个事件, 然后这个事件的处理函数是handle,它改变了size的大小 -->
+
+        <!-- 传递参数时: -->
+        <item :attr='Attr' v-on:enlarge-text='handle($event)'></item>       <!-- $event代表传递过来的参数值 -->               
+    </div>
+    <script type="text/javascript">
+    Vue.component('item',{
+        props: ['attr'],
+        template:  `<button @click='$emit("enlarge-text", 5)'>扩大父组件字体</button> `
+        /* 点击此组件时, 将会触发enlarge-text这个事件，并且传递了一个参数 */
+        /* 在父组件中通过v-on来监听 */
+    })
+        var vm = new Vue({
+            el: '#ok',     
+            data: {  
+                Attr: 'love',      
+                str: 'HelloWorld',
+                size: 10
+            },
+            methods: {
+                handle: function(val) {
+                    // this.size += 10;
+                    this.size += val;       /* 子组件传递过来的参数 */
+                }
+            }
+        })
+    </script>
+</body>
+</html>

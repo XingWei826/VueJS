@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 
+            事件修饰符：
+            .stop, .prevent
+
+            按键修饰符：
+            .enter, .delete
+        */
+    </style>
+</head>
+
+<body>
+    <div id="ok">
+        <h1>事件修饰符</h1>
+        <div>{{num}}</div>
+        <div v-on:click='father'>                           
+            <button @click.stop='son'>点击儿子</button>     <!-- .stop修饰符 -->
+        </div>
+        <div>
+            <a href="https://www.baidu.com" v-on:click.prevent='handle'>百度</a>    <!-- .prevent修饰符 -->
+        </div>
+        <h1>按键修饰符</h1>
+        <form action="">
+            userName: <input type="text" v-model='name' v-on:keyup.delete='clearAll'><br>
+            passWord: <input type="text" v-model='password' v-on:keyup.enter='submit'>
+            <input type="button" name="" id="" value="提交" v-on:click='submit'>
+        </form>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#ok',
+            data: {
+                num: 0,
+                name: 'Zhang',
+                password: 'Zhang'
+            },
+            methods: {
+                father: function() {
+                    console.log('father');
+                },
+                son: function(event) {
+                    console.log('son');
+                    // 阻止冒泡(传统行为)
+                    // event.stopPropagation();
+                },
+                handle: function() {
+                    //阻止默认行为(传统行为)
+                    // event.preventDefault();
+                },
+                submit: function() {
+                    console.log(this.name + ' ' + this.password);
+                },
+                clearAll: function() {
+                    this.name = '';
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

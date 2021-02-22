@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <!-- app的Vue实例 -->
+    <div id="app">
+        <item></item>       <!-- 使用全局组件 -->
+        <com></com>         <!-- 使用局部组件 -->
+    </div>
+
+    <!-- APP的Vue实例 -->
+    <div id="APP">
+        {{message}}
+        <item></item>               <!-- 使用全局组件, OK-->
+        <!-- <com></com> -->         <!-- 使用在app的Vue实例中注册的局部组件com, error -->
+
+    </div>
+    <script>
+        // 注册组件（全局组件）
+        Vue.component('item', {
+            template: '<h1>全局组件</h1>'
+        });
+        //局部组件
+        var child = {
+            template: `<h1>我是局部组件</h1>`
+        };
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'HelloWorld',
+            },
+            components: {
+                'com': child
+            }
+        });
+        var APP = new Vue({
+            el: "#APP",
+            data: {
+                message: 'APP'
+            }
+        })
+    </script>
+    <!-- 组件系统是 Vue 的另一个重要概念，因为它是一种抽象，允许我们使用小型、独立和通常可复用的组件构建大型应用。 -->
+    <!-- 仔细想想，几乎任意类型的应用界面都可以抽象为一个组件树。 -->
+
+    <!-- 所有实例都能用全局组件。 -->
+    <!-- 我们也可以在实例选项中注册局部组件，这样组件只能在这个实例中使用。 -->
+    <!-- 比如在app的Vue实例中分别注册了全局组件和局部组件，
+         此时，我们又创建了另一个APP的Vue实例，在APP的Vue实例和app的Vue实例中我们都可以使用全局组件item，但是不能在APP的Vue实例中使用 在app的Vue实例中注册局部组件com!-->
+
+    <!-- 但是这样会为每个待办项渲染同样的文本，这看起来并不炫酷。 -->
+    <!-- 我们应该能从父作用域将数据传到子组件才对。让我们来修改一下组件的定义，使之能够接受一个 prop： -->
+    <!-- 代码见03_组件2 -->
+
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <div id="ok">
+        <h1>--------第一种引用方式：--------</h1>
+        <self-com>
+            <p slot='head'>头部内容</p>
+            <p>中间内容1</p>
+            <p>中间内容2</p>
+            <p slot="foot">底部内容</p>
+        </self-com>
+
+        <h1>------第二种引用方式：----------</h1>
+        <self-com>
+            <template slot="head">
+                <p>头部内容</p>
+            </template>
+            <p>中间内容1</p>
+            <p>中间内容2</p>
+            <template slot="foot">
+                <p>底部内容</p>
+            </template>
+        </self-com>
+    </div>
+    <script type="text/javascript">
+        Vue.component('self-com', {
+            template: `
+            <div>
+                <header>
+                    <div style="color: red">
+                        <slot name='head'></slot>
+                    </h1>
+                </header> 
+                <center>
+                    <slot></slot>    
+                </center> 
+                <footer>
+                    <div style="color: green">
+                        <slot name="foot"></slot>
+                    </div>
+                </footer>  
+            </div>
+        `
+        })
+        var vm = new Vue({
+            el: '#ok',
+            data: {
+            },
+            methods: {
+            }
+        })
+    </script>
+</body>
+
+</html>

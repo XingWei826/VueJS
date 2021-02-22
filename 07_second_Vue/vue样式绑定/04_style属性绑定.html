@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <style>
+        div {
+            width: 200px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 1. 直接设置样式(之前的css属性在此处可以写为驼峰形式(无需加引号), 也可以写为短横线形式,此时必须加引号.否则报错) -->
+        <div v-bind:style="{ color: activeColor, 'font-size': fontSize + 'px' }">短横线形式</div>
+        <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">驼峰形式</div>
+        <!-- 2. 直接绑定到一个对象-->
+        <div v-bind:style="styleObject">都是菜鸟</div>
+        <!-- 3. 数组形式的绑定 -->
+        <div v-bind:style="[styleObject,overrideStyle]">好吧</div>
+
+        <div @click='test(2,3)' style="background-color: yellow"></div>     <!-- 方法的测试 -->
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                activeColor: 'green',
+                fontSize: 30,
+                styleObject: {
+                    color: 'red',
+                    fontSize: '30px'
+                },
+                overrideStyle: {
+                    'fontWeight': 'bolder'
+                }
+            },
+            methods: {
+                test(num1,num2) {
+                    alert(num1 + num2);
+                }
+            },
+            computed: {
+            },
+            watch: {
+            }
+        });
+        // vm.test(1,3);       /* 也可以直接用JavaScript的形式进行函数的调用 */
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="ok">
+        <div v-bind:style='{border: borderStyle,width:widthStyle,height:heightStyle }'></div>
+        <div v-bind:style='objStyle'></div>
+        <div v-bind:style=[objStyle,secondStyles]></div>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#ok',
+            data: {
+                borderStyle: 'thin solid red',
+                widthStyle: '100px',
+                heightStyle: '200px',
+                objStyle: {
+                    border: 'thin solid blue',
+                    width: '200px',
+                    height: '100px',
+                },
+                secondStyles: {
+                    backgroundColor: 'yellow',
+                }
+            },
+            methods: {
+                handle: function() {
+                    // this.b
+                }
+            }
+        })
+    </script>
+</body>
+</html>

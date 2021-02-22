@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <!-- 自定义指令：
+        注册后，以v-名字形式来使用自定义指令！
+        一个指令定义对象可以提供如下几个钩子函数 (均为可选)：
+            bind:只调用一次，指令第一次绑定到元素时调用;在这里可以进行一次性的初始化设置。
+            inserted:被绑定元素插入父节点时调用;
+            指令钩子函数的参数：    
+                el:     指令所绑定的元素, 用来直接操作Dom
+                binging: 一个对象
+                vnode:
+                oldVnode:  
+    -->                                             
+    <div id="ok">
+        <input type="text" v-focus>
+        <!-- <input type="text" value="HelloWorld" v-color='msg'> -->
+        <input type="text" value="HelloWorld" v-color='object'>
+        <input type="text" value="sfdf" v-set='object'>
+    </div>
+    <div></div>
+    <script type="text/javascript">
+    //全局自定义指令
+        Vue.directive('focus', {
+            inserted: function (el) {       /* el表示input这个元素 */
+                el.focus();
+            }
+        });
+        Vue.directive('color', {
+            bind: function (el, binding) {    /* binding是一个对象 */
+                // console.log(binding);
+                // console.log(el);
+                // console.log(binding.value);  //通过binding可以获取到v-color对应的值
+                el.style.backgroundColor = binding.value.color;
+            }
+        });
+
+        var vm = new Vue({
+            el: '#ok',
+            data: {
+                object: {
+                    color: 'orange',
+                },
+                msg: 'hello'
+            },
+            methods: {
+            },
+            // 局部自定义指令
+            directives: {
+                set: {              /* 特别注意：这个自定义指令的名字必须是小写，不能含有大写，否则不起作用 */
+                    bind: function(el, binding) {
+                        // el.style.backgroundColor = binding.value.color;
+                        el.style.backgroundColor = 'blue';
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

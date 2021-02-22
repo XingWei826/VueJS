@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <style>
+        .active {
+            width: 100px;
+            height: 100px;
+            background-color: green;
+        }
+        .danger {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 1. 通过v-bind:class绑定类选择器，然后通过该布尔值进行控制 -->
+        <!-- 用一个对象来倒腾, 对象的属性表示类选择器, 属性值设置为bool值, 用来控制是否开启类选择器 -->
+        <div v-bind:class='{ "active": isActive}'></div>                          <!-- green -->
+        <div v-bind:class='{ "active": isActive, "danger": isDanger }'></div>       <!-- red -->
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                isActive: true,
+                isDanger: true
+            },
+            methods: {
+            },
+            computed: {
+            },
+            watch: {
+            }
+        })
+    </script>
+</body>
+</html>

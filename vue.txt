@@ -1,0 +1,60 @@
+v-text: 为标签设置文本
+v-html: 可以解析html
+v-on：  元素绑定事件
+v-on:click   === @click
+v-show: 根据表达式的值，切换元素的显示和隐藏
+指令后面的值，都是解析为bool值。
+v-if:本质是操作dom树
+v-bind:属性名= 表达式
+	v-bind:src="imgSrc"
+	data: {
+		imgSrc: './ball.png
+	}
+	简写：:src
+	需要动态的增删class建议使用对象的形式。
+	.active {...}
+	<img v-bind:class="isActive?active:''">
+	<img :class="{active: isActive}">
+
+v-for: 依照模板批量生成:vegetables是个数组，有2个元素，
+		所以将会生成2个<h2>标签;
+		v-for是响应式;
+<h2 v-for="item in vegetables">{{item.name}}
+</h2>
+
+data: {
+	vegetables:[
+		{name: 'hello'},
+		{name: 'world'}
+	]
+}
+
+hello
+world
+
+<input @keyup.enter="callback">
+.enter就是事件修饰符;
+事件后面跟上.修饰符可以对事件进行限制(更精确的匹配);
+
+v-model：便捷的获取和设置表单元素的值(双向数据绑定)
+		 绑定的数据会和表单元素值相关联;
+		 绑定的数据<-->表单元素的值
+
+
+
+v-on:keyup.ente
+@click.stop
+
+@class="{damao: true, ermao: true}"
+@class="[first,second]"
+
+
+
+
+
+
+
+
+
+
+

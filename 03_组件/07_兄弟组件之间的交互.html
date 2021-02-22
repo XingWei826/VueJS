@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+    <!-- 
+        兄弟组件的交互：
+        1. 通过事件中心进行交互
+            var eventHub = new Vue();
+        2. 监听事件与销毁事件
+            eventHub.$on('事件名称',处理函数)
+            eventHub.$off('事件名称')
+        3. 触发事件
+            eventHub.$emit('事件名称',id)
+     -->
+</head>
+
+<body>
+    <div id="ok">
+        <bother1-com></bother1-com>
+        <bother2-com></bother2-com>
+        <div>
+            <button @click="destroy">销毁</button>
+        </div>
+    </div>
+    <script type="text/javascript">
+    //定义事件中心
+    var hub = new Vue();
+    // 定义2个兄弟组件
+    Vue.component('bother1-com',{
+        data: function() {
+            return {
+                num: 0
+            }
+        },
+        template: `
+            <div>
+                <div>bother1: {{num}}</div>    
+                    <button @click='handle'>点击</button>
+                </div>
+            </div>
+        `,
+        methods: {
+            handle: function() {
+                hub.$emit('bother2-event',1);       /* 给兄弟组件发射事件信号 */
+            }
+        },
+        mounted() {
+            //我的事件处理函数
+            hub.$on('bother1-event',(val)=>{
+                this.num += val;                /*val是兄弟组件传过来的值 */
+            });
+        },
+    });
+    Vue.component('bother2-com',{
+        data: function() {
+            return {
+                num: 0
+            }
+        },
+        template: `
+            <div>
+                <div>bother2: {{num}}</div>    
+                <div>
+                    <button @click='handle'>点击</button>
+                </div>
+            </div>
+        `,
+        methods: {
+            handle: function() {
+                hub.$emit('bother1-event',2);
+            }
+        },
+        mounted() {
+            hub.$on('bother2-event',(val)=>{
+                this.num += val;
+            })
+        },
+    });
+        var vm = new Vue({
+            el: '#ok',     
+            data: {             
+            },
+            methods: {
+                destroy: function() {
+                    hub.$off('bother1-event');
+                    hub.$off('bother2-event');
+                }
+            }
+        })
+    </script>
+</body>
+</html>

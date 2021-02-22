@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .damao {
+            color: red;
+        }
+        .ermao {
+            background-color: green;
+        }
+
+        .FirstClass {
+            border: thin solid black;
+        }
+        .SecondClass {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div id="ok">
+        <!-- class样式处理：1. 对象语法实现 -->
+        <!-- <div class="damao">你好</div> -->
+        <!-- <div v-bind:class="{damao: isDamao, ermao: isErmao}">你好</div> -->
+        <!-- <button v-on:click='handle'>点击</button> -->
+        
+        <!-- class样式处理：2. 数组语法实现 -->
+        <div v-bind:class='[First,Second]'>你好</div>
+        <button v-on:click='handle_Array'>点击</button>
+        
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#ok',
+            data: {
+                /* 对象形式： */
+                isDamao: true,
+                isErmao: true,
+                
+                /* 数组形式： */
+                First: 'FirstClass',        /* First实际上就是FirstClass的别名 */
+                Second: 'SecondClass'
+            } ,
+            methods: {
+                handle: function() {
+                    this.isDamao = !this.isDamao;
+                    this.isErmao = !this.isErmao;
+                },
+                handle_Array: function() {
+                    this.First = '';
+                    this.Second = '';
+                }
+            },
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="ok">
+        <div>列表</div>
+        <ul>
+            <li v-for='item in fruits'>{{item}}</li>
+            <li v-for='(item,index) in fruits'>{{item + '---' + index}}</li><br>
+            <li v-for='item in person'>
+                <span>{{item.name}}</span>
+                <span>---</span>
+                <span>{{item.age}}</span>
+            </li>
+        </ul>
+        <br>
+
+        <div>遍历对象</div>
+        <div v-for='(value,key,index) in obj'>{{ value + '    ' + key + '   ' + index}}</div>
+
+        <div>v-for和v-if的结合使用</div>
+        <div v-if='value==23' v-for='(value,key,index) in obj'> <!-- （值,键,索引） -->
+            {{ value + '    ' + key + '   ' + index}}
+        </div>
+    </div>                                                  
+    <script src="../vue.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#ok',     
+            data: {             
+                fruits:['apple','orange,','banana'],
+                person:[{
+                    name: 'Zhang',
+                    age: 19
+                },{
+                    name: 'Wang',
+                    age:20
+                },{
+                    name: 'Li',
+                    age: 23
+                }],
+                obj: {
+                    num: 101,
+                    name: 'Zhang',
+                    age: 23,
+                }
+            },
+            methods: {
+            }
+        });
+    </script>
+</body>
+
+</html>

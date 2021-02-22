@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+        数据绑定指令
+        (1)·v-text 填充纯文本
+            1.相比插值表达式更加简洁;
+            2.不存在闪烁;
+        (2)·v-html填充HTML片段
+            2.存在安全问题;
+            3.本网站内部数据可以使用，来自第三方的数据不可以用;
+        (3)·v-pre 填充原始信息
+            1.显示原始信息，跳过编译过程（分析编译过程）;
+     -->
+     <style></style>
+</head>
+<body>
+    <div id="hello">
+        <div v-cloak>{{msg}}</div>
+        <div v-text="msg"></div>        <!-- v-text -->
+        <div v-html='msg1'></div>       <!-- v-html -->
+        <div v-pre>{}{}</div>           <!-- v-pre -->
+    </div>
+    <script src="../vue.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#hello',       
+            data: {        
+                msg: 'Hello World,Vue!',
+                msg1: '<h1>HTML</h1>',
+            }
+        })
+    </script>
+</body>
+</html>

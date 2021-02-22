@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <!-- 带参过滤器：  Vue.filter('name',function(value, arg))-->
+    <div id="ok">
+        <div>{{date | myFilter('abc','cde')}}</div>
+    </div>
+    <script type="text/javascript">
+    Vue.filter('myFilter',function(val,arg1,arg2){        /* arg1,arg2是过滤器里的参数 */
+        console.log(arg1 + arg2);        
+    });
+        var vm = new Vue({
+            el: '#ok',     
+            data: {             
+                date: new Date()
+            },
+            methods: {
+            }
+        })
+    </script>
+</body>
+</html>

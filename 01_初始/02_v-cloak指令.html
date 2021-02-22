@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+        指令
+            1.什么是指令？
+            ·指令的本质就是自定义属性
+            ·指令的格式：以v-开始（比如：v-cloak）
+            在插值表达式所在的标签中添加v-cloak指令背后的原理：
+                    先通过样式隐藏内容，然后在内存中进行值的替换，替换好之后再显示最终的结果
+
+            V-cloak指令用法
+            ·插值表达式存在的问题：闪烁问题;
+            ·如何解决该问题：使用v-cloak指令;
+            ·解决该问题的原理：先隐藏，替换好值之后再显示最终的值;
+     -->
+     <style>
+         [v-cloak] { 
+             display: none;
+         }
+     </style>
+</head>
+<body>
+    <div id="hello">
+        <div v-cloak>{{msg}}</div>
+    </div>
+    <script src="../vue.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#hello',       
+            data: {        
+                msg: 'Hello World,Vue!'
+            }
+        })
+    </script>
+</body>
+</html>

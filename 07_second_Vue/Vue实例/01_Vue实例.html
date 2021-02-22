@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <!--
+         一个 Vue 应用由一个通过 new Vue 创建的根 Vue 实例，以及可选的嵌套的、可复用的组件树组成。
+     -->
+    <!-- 
+         数据与方法：
+            当一个 Vue 实例被创建时，它将 data 对象中的所有的 property 加入到 Vue 的响应式系统中。
+            当这些 property 的值发生改变时，视图将会产生“响应”，即匹配更新为新的值。
+            当这些数据改变时，视图会进行重渲染。
+            值得注意的是只有当实例被创建时就已经存在于 data 中的 property 才是响应式的。
+    -->
+    <!-- 
+          也就是说如果你添加一个新的 property，比如： vm.b = 'hi'
+          那么对 b 的改动将不会触发任何视图的更新。
+          如果你知道你会在晚些时候需要一个 property，但是一开始它为空或不存在，那么你仅需要设置一些初始值。
+          比如：
+            data: {
+                newTodoText: '',
+                visitCount: 0,
+                hideCompletedTodos: false,
+                todos: [],
+                error: null
+            }
+    -->
+    <!-- 
+           这里唯一的例外是使用 Object.freeze()，这会阻止修改现有的 property，也意味着响应系统无法再追踪变化。
+
+    -->
+    <!-- 
+            Vue实例的实行与方法：
+                它们都有前缀 $，以便与用户定义的 property 区分开来。
+                $data: 获取Vue实例观察的数据对象;
+                $el: 获取Vue实例使用的根 DOM 元素;
+                $watch: 观察 Vue 实例上的一个表达式或者一个函数计算结果的变化;
+                        当监听的表达式的值发生变化时候，将自出发callback函数。
+                        vm.$watch( expOrFn, callback, [options] )
+    -->
+</head>
+
+<body>
+    <div id="app">
+        {{ obj }}
+    </div>
+    <script>
+        var obj = {
+            name: 'Zhang',
+            age: 10
+        };
+        Object.freeze(obj);         /* 将失去响应式系统跟踪 */
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                obj: obj,
+                message: 'HelloWorld',
+                num: 123
+            }
+        });
+        // Vue的一些实例方法：
+        console.log(vm.$el === document.getElementById('app'));     //true
+        console.log(vm.$data);
+        vm.$watch('num',function(newValue,oldValue) {
+            alert('监听到了'+ '新值：' + newValue + '     旧值：' + oldValue);
+        })
+    </script>
+</body>
+
+</html>

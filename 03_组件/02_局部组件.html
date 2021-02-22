@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <!-- 
+        局部组件只能在注册它的父组件中使用;别的地方把不可以使用;
+     -->
+    <div id="ok">
+        <tom-com></tom-com>
+        <jerry-com></jerry-com>
+    </div>
+    <script type="text/javascript">
+    // 局部组件
+    var tom = {
+        data: function() {
+            return {
+                msg: 'helloTom'
+            }
+        },
+        template:'<div>{{msg}}</div>'
+    };
+    var jerry = {
+        data: function() {
+            return {
+                msg: 'helloJerry'
+            }
+        },
+        template:'<div>{{msg}}</div>'
+    };
+        var vm = new Vue({
+            el: '#ok',     
+            data: {             
+            },
+            methods: {
+            },
+            components: {
+                'tom-com': tom,
+                'jerry-com': jerry
+                /* tom 和 jerry不要加引号，否则无法无法正常显示 */
+            }
+        });
+    </script>
+</body>
+</html>

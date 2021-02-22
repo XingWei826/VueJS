@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style></style>
+    <!-- 
+        v-bind: 属性绑定;
+        动态属性;
+        v-bind:href :
+        :href（简写属性）
+     -->
+</head>
+
+<body>
+    <div id="ok">
+        <a v-bind:href=url>百度</a>
+        <!-- <a :href=url>百度</a>-->   <!-- 简写 -->
+        <button v-on:click='handle'>切换</button>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#ok',
+            data: {
+                url: 'https:www.baidu.com'
+            },
+            methods: {
+                handle: function () {
+                    var a = document.querySelector('a');
+                    a.innerHTML = '传智播客',
+                    this.url = 'http://itcast.cn'
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <!-- 
+        过滤器：格式化数据，比如将字符串格式化为首字母大写，将日期格式化为指定的格式等。
+        说白了，就是对数据进行截获作特殊处理！
+        hello -> Hello
+     -->
+    <div id="ok">
+        <input type="text" name="" id="" v-model="msg">
+        <div>{{msg | toUpper}}</div>                <!-- 调用过滤器 -->
+        <div>{{msg | toUpper | toLower}}</div>      <!-- 调用多个过滤器,前一个过滤的结果当做后一个过滤的原始值 -->
+        <div :abc='msg | toUpper'>测试</div>        <!-- 在属性之中使用过滤器 -->
+                                <!-- 也即是将属性值给调用toUpper过滤器处理, 运行后可以F12查看 -->
+        <div>{{msg | upper}}</div>                  <!-- 局部过滤器 -->
+    </div>
+    <script type="text/javascript">
+    /* 过滤器: 使其首字母大写 */
+    Vue.filter('toUpper',function(val) {    /* val是要处理的数据 */
+        console.log(val);
+        return val.charAt(0).toUpperCase() + val.slice(1);
+    });
+    Vue.filter('toLower',function(val) {
+        return val.charAt(0).toLowerCase() + val.slice(1);
+    });
+        var vm = new Vue({
+            el: '#ok',     
+            data: {
+                msg: ''             
+            },
+            methods: {
+            },
+            filters: {
+                upper: function(val){
+                    return val.charAt(0).toUpperCase() + val.slice(1);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

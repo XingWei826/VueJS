@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <!-- 
+        侦听器：
+            虽然计算属性在大多数情况下更合适，但有时也需要一个自定义的侦听器。
+            这就是为什么 Vue 通过 watch 选项提供了一个更通用的方法，
+            来响应数据的变化。当需要在数据变化时执行异步或开销较大的操作时，
+            这个方式是最有用的。
+     -->
+</head>
+
+<body>
+    <div id="app">
+        千米 : <input type="text" v-model="kilometers">
+        米 : <input type="text" v-model="meters">
+        <h1 id="info"></h1>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                kilometers: 0,
+                meters: 0
+            },
+            methods: {
+            },
+            computed: {
+            },
+            // 观察表达式的值
+            watch: {
+                /* 一旦属性kilometers的值发生变化, 那么将自动触发此函数 */
+                kilometers: function (val) {
+                    console.log(val);
+                    this.kilometers = val;
+                    this.meters = this.kilometers * 1000
+                },
+                meters: function (val) {
+                    this.kilometers = val / 1000;
+                    this.meters = val;
+                }
+            }
+        });
+        //运用实例方法
+        vm.$watch('kilometers',function(newValue,oldValue) {
+            document.getElementById('info').innerHTML =  "修改前值为: " + oldValue + "，修改后值为: " + newValue;
+        })
+    </script>
+</body>
+
+</html>

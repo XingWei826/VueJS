@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <div id="ok">
+        <input type="text" v-model="name1"><br>
+        <input type="text" v-model="name2">
+        <div>{{name}}</div>
+        <div>{{fullName}}</div>
+    </div>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#ok',     
+            data: {          
+                name1: 'Zhang',
+                name2: 'Wang',
+                name: 'ZhangWang',
+            },
+            methods: {
+            },
+            computed: {
+                fullName: function() {
+                    return this.name1 + this.name2;
+                }
+            },
+            watch: {
+                name1: function(val) {
+                    this.name = val + this.name1;
+                },
+                name2: function(val) {
+                    this.name = this.name2 + val;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

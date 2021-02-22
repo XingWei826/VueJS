@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .FirstClass {
+            border: thin solid black;
+        }
+        .SecondClass {
+            background-color: yellow;
+        }
+        .Font {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        1. 对象绑定和数组绑定可以结合使用;
+        2. 可以进行简化处理;
+        3. 行内中的class如何处理? => 不会被覆盖，一并使用;
+     -->
+    <div id="ok">
+        <!-- class样式处理：1. 对象语法实现 -->
+        <!-- <div class="damao">你好</div> -->
+        <!-- <div v-bind:class={"damao: isDamao, ermao: isErmao}">你好</div> -->
+        <!-- <button v-on:click='handle'>点击</button> -->
+        
+        <!-- 细节1： -->
+        <!-- <div v-bind:class='[First,Second,{damao: true}]'>你好</div> -->
+
+        <!-- 细节2： -->
+        <div v-bind:class='array'>你好</div>
+        <div v-bind:class='obj'>他好</div>
+
+        <!-- 细节3： -->
+        <div class="Font" v-bind:class='array'>都好</div>
+
+        
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#ok',
+            data: {
+                First: 'FirstClass',
+                Second: 'SecondClass',
+
+                /* 简化处理： */
+                array: ['FirstClass','SecondClass'],
+                obj: {
+                    FirstClass: true,
+                    SecondClass: true,
+                }
+            } ,
+            methods: {
+            },
+        })
+    </script>
+</body>
+</html>

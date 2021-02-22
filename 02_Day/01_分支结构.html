@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+        v-if
+        v-else
+        v-else-if
+        v-show
+
+        v-if 和 v-show的区别：
+            v-if控制元素是否渲染到页面;
+            v-show控制元素是否显示(已经渲染到了页面);
+     -->
+</head>
+
+<body>
+    <div id="ok">
+        <div v-if='score>90'>优秀</div>
+        <div v-else-if='score<90&&score>80'>良好</div>
+        <div v-else>差</div>
+        <div v-show='flag'>测试v-show</div>
+    </div>
+    <script src="../vue.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#ok',     
+            data: {             
+                score: 100,
+                flag: false
+            },
+            methods: {
+            }
+        })
+    </script>
+</body>
+
+</html>

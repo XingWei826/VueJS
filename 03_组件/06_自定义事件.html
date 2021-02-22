@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+    <script src="../vue-router.js"></script>        
+    <!-- 
+        父组件是使用 props 传递数据给子组件，但如果子组件要把数据传递回去，就需要使用自定义事件;
+        我们可以使用 v-on 绑定自定义事件, 每个 Vue 实例都实现了事件接口(Events interface)，即：
+        使用 $on(eventName) 监听事件;
+        使用 $emit(eventName) 触发事件;
+        另外，父组件可以在使用子组件的地方直接用 v-on 来监听子组件触发的事件;
+        以下实例中子组件已经和它外部完全解耦了。它所做的只是触发一个父组件关心的内部事件。
+     -->
+
+</head>
+
+<body>
+    <div id="ok">
+        <p> {{ total }}</p>
+        <button-counter v-on:add="sum"></button-counter>
+        <button-counter v-on:add="sum"></button-counter>
+    </div>
+    <script type="text/javascript">
+    Vue.component('button-counter',{
+         /* 注意：data必须是一个函数, 这样的好处就是每个实例可以维护一份被返回对象的独立的拷贝，
+         如果data是一个对象则会影响到其他实例*/
+        data: function() {     
+            return {
+                counter: 0
+            }
+        },
+        template:  `<button v-on:click="incrementHandler">{{ counter }}</button>`,
+        methods: {
+            incrementHandler: function() {
+                this.counter += 1;
+                this.$emit('add');
+            }
+        },
+    })
+        var vm = new Vue({
+            el: '#ok',     
+            data: {             
+                total: 0,
+            },
+            methods: {
+                sum: function() {
+                    this.total += 1;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

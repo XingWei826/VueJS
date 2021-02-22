@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <style>
+        .base {
+            width: 100px;
+            height: 100px;
+        }
+
+        .safe {
+            background-color: green;
+        }
+
+        .danger {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 2. 通过v-bind:class绑定返回对象的计算属性 -->
+        <!-- 此外，我们也可以在这里绑定返回对象的计算属性。这是一个常用且强大的模式！ -->
+        <div v-bind:class="classObject"></div>       <!-- 最终显示为danger -->
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                isActive: true,
+                error: {
+                    value: true,
+                    type: 'fatal'
+                }
+            },
+            methods: {
+            },
+            computed: {
+                classObject: function () {
+                    return {
+                        base: true,
+                        safe: this.isActive && !this.error.value,
+                        danger: this.error.value && this.error.type === 'fatal',
+                    }
+                }
+            },
+            watch: {
+            }
+        })
+    </script>
+</body>
+
+</html>

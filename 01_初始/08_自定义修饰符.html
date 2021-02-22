@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 
+
+        */
+    </style>
+</head>
+
+<body>
+    <div id="ok">
+        <h1>自定义按键修饰符</h1>
+        <form action="">
+            userName: <input type="text" v-model='name' v-on:keyup.aaa='handle'><br>
+            passWord: <input type="text" v-model='password' v-on:keyup.enter=''>
+            <input type="button" name="" id="" value="提交" v-on:click=''>
+        </form>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        Vue.config.keyCodes.aaa = 65;  /* 自定义按键修饰符  a键的别名就是aaa*/
+        var vm = new Vue({
+            el: '#ok',
+            data: {
+                num: 0,
+                name: 'Zhang',
+                password: '123'
+            },
+            methods: {
+                handle: function() {
+                    // console.log(event.keyCode);  
+                    this.name = '';
+                },
+                clearAll: function(event) {
+                   
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

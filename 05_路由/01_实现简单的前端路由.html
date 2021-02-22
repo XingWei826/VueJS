@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <div id="ok">
+        <a href="#/MainPage">主页</a>
+        <a href="#/Technology">科技</a>
+        <a href="#/Live">生活</a>
+        <a href="#/Play">娱乐</a>
+        
+        <!-- 动态组件: is属性指代具体组件的名称，把对应的组件渲染到component标签所在的位置 -->
+        <!-- 我们可以把component标签当做是【组件中的占位符】 -->
+        <component :is="comName" ></component>
+    </div>
+    <script type="text/javascript">
+    var mainPage = {
+        template: ` <h1>这里是主页</h1>`,
+    }
+    var technology = {
+        template:  `<h1>这里是科技</h1>`
+    };
+    var live = {
+        template: ` <h1>这里是生活</h1>`,
+    };
+    var play = {
+        template: ` <h1>这里是娱乐</h1>`,
+    };
+        var vm = new Vue({
+            el: '#ok',     
+            data: {       
+                comName: 'live'      
+            },
+            methods: {
+            },
+            // 注册为私有组件
+            components: {
+                'mainPage': mainPage,
+                'technology': technology,
+                live,       /* 实际是ES6的简写 */
+                play
+            }
+        });
+        // 
+        window.onhashchange = function() {
+            // 通过location.hash 获取最新的hash值,切换到要系显示的组件的名称
+            // console.log(location.hash);
+            switch(location.hash.slice(1)) {
+                case '/MainPage': 
+                    vm.comName = 'mainPage';
+                    break;
+                case '/Technology':
+                    vm.comName = 'technology';
+                    break;
+                case '/Live': 
+                    vm.comName = 'live';
+                    break;
+                case '/Play':
+                    vm.comName = 'play';
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

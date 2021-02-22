@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <style>
+        .use {
+            color: green;
+            background-color: red;
+        }
+        .after {
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 在注册组件的时候给它添加了use类选择器, 在使用它的时候又给它添加了类选择器, 实际上则相当于同时添加了use after两个类选择器 -->
+        <self-com class="after"></self-com>   
+    </div>
+    <script>
+        Vue.component('self-com',{      
+            template: `<h1 class="use">组件使用class绑定</h1>`
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+            },
+            methods: {
+            },
+            computed: {
+            },
+            watch: {
+            }
+        })
+    </script>
+</body>
+
+</html>

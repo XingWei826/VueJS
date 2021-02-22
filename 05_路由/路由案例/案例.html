@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../vue.js" type="text/javascript"></script>
+    <script src="../../vue-router.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: gray;
+            height: 50px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bolder;
+            margin-bottom: 0;
+        }
+        .left ul {
+            float: left;
+            width: 200px;
+            height: 600px;
+            background-color: gray;
+        }
+        .left ul li {
+            height: 30px;
+            margin-top: 20px;
+            text-align: left;
+            list-style: none;
+        }
+        .left ul li:hover {
+            background-color: orange;
+        }
+        .right {
+            float: left;
+            width: 600px;
+            height: 100%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 要被Vue实例所控制的区域 -->
+    <div id="app">
+        <router-view></router-view>
+    </div>
+
+    <script type="text/javascript">
+        // 定义APP根组件
+        const App = {
+            template: `
+            <div>
+                    <!-- 头部区域 -->
+                <header class="header">后台管理系统</header>
+                    <!-- 中间主体区域 -->
+                <div class="main">
+                    <!-- 左侧导航栏 -->
+                    <div class="content left">
+                        <ul>
+                            <li style="margin-top: 0px">
+                                <router-link to="/users">用户管理</router-link>
+                            </li>
+                            <li><router-link to="/rights">权限管理</router-link></li>
+                            <li><router-link to="/goods">商品管理</router-link></li>
+                            <li><router-link to="/orders">订单管理</router-link></li>
+                            <li><router-link to="/settings">系统设置</router-link></li>
+                        </ul>
+                    </div>
+                    <!-- 右侧内容区域 -->
+                    <div class="content right">
+                        <div class="main content">
+                            <router-view></router-view>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `,
+        };
+        // 左侧各菜单项组件的创建
+        const user = {
+            data: function () {
+                return {
+                    userlist: [
+                        { id: 101, name: "Zhang", age: 10 },
+                        { id: 102, name: "Wang", age: 20 },
+                        { id: 103, name: "Gao", age: 24 },
+                        { id: 104, name: "Fang", age: 45 },
+                        { id: 105, name: "Zhao", age: 52 }
+                    ]
+                }
+            },
+            template: `<div>
+                <h1>用户管理组件</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th>姓名</th>
+                            <th>年龄</th>
+                            <th>操作</th>
+                        </tr>    
+                    </thead>
+                    <tbody>
+                        <tr :key="item.id" v-for="item in userlist">
+                            <td>{{item.id}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.age}}</td>
+                            <td><a href="javascript:;" @click="goDetail(item.id)">详情</a></td>
+                        </tr>    
+                    </tbody>
+                </table>
+                </div>`,
+            methods: {
+                goDetail(id) {
+                    // console.log(uid);
+                    this.$router.push('/userInfo/' + id);
+                }
+            },
+        };
+        const userInfo = {
+            props: ['uid'],
+            template: `
+            <div>
+                <h1>用户详情页 ---用户id为： {{uid}}</h1>
+                <button @click='goBack'>后退</button>
+            </div>`,
+            methods: {
+                goBack() {
+                    this.$router.go(-1);
+                }
+            },
+        };
+        const right = {
+            template: `<h1>权限管理组件</h1>`
+        };
+        const good = {
+            template: `<h1>商品管理组件</h1>`
+        };
+        const order = {
+            template: `<h1>订单管理组件</h1>`
+        };
+        const setting = {
+            template: `<h1>系统设置组件</h1>`
+        };
+        // 创建路由对象
+        const router = new VueRouter({
+            routes: [
+                {
+                    path: '/',
+                    component: App,
+                    redirect: '/users',
+                    children: [
+                        { path: '/users', component: user },
+                        { path: '/userInfo/:uid', component: userInfo, props: true },
+                        { path: '/rights', component: right },
+                        { path: '/goods', component: good },
+                        { path: '/orders', component: order },
+                        { path: '/settings', component: setting },
+                    ]
+                },
+            ]
+        });
+        // Vue 实例对象
+        const vm = new Vue({
+            el: "#app",
+            methods: {
+            },
+            router: router,
+        })
+    </script>
+</body>
+
+</html>

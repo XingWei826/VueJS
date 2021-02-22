@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+    <script src="../vue-router.js"></script>   
+    <!-- 
+        动态路由传参：
+            props为一个函数;
+     -->
+</head>
+
+<body>
+    <div id="ok">
+        <router-link to="/user/1">Go to User1</router-link>
+        <router-link to="/user/2">Go to User2</router-link>
+        <router-link to="/user/3">Go to User3</router-link>
+        <router-link to="/register">Go to Register</router-link>
+        <router-view></router-view>
+    </div>
+    <script type="text/javascript">
+    const User = {
+        props: ['uid','name','age'],
+        template: `<h1>User组件 --- id为{{ uid }} --- 姓名：{{name}} --- 年龄：{{age}}</h1>`
+    };
+    const Register = {
+        template: `<h1>Register组件</h1>`
+    };
+    const router = new VueRouter({
+        routes: [
+            {path: '/', redirect: '/register'},     
+            {
+                path: '/user/:uid', 
+                component: User, 
+                props: (object) => (  {name: 'Zhang', age: 23, uid: object.params.uid} )
+                // props: (route) => {return {name: 'Zhang', age: 23, uid: route.params.uid} }
+            },
+            {path: '/register',component: Register}
+        ]
+    });
+        var vm = new Vue({
+            el: '#ok',     
+            data: {             
+            },
+            methods: {
+            },
+            router: router,
+        });
+    </script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+    <script src="../vue-router.js" type="text/javascript"></script>         
+    <!-- 
+        在 <template> 元素上使用 v-if 条件渲染分组: 
+            因为 v-if 是一个指令，所以必须将它添加到一个元素上;
+            但是如果想切换多个元素呢？
+            此时可以把一个 <template> 元素当做不可见的包裹元素，并在上面使用 v-if;
+            最终的渲染结果将不包含 <template> 元素。
+                <template v-if="ok">
+                    <h1>Title</h1>
+                    <P>Paragraph 1</p>
+                    <p>Paragraph 2</p>
+                </template>
+     -->                                                                                                               </script>
+</head>
+
+<body>
+    <!-- template标签放在Vue实例绑定的元素内部,那么它里面的内容可以显示,但是后台中将不会存在这个标签;  -->
+    <!-- template标签不放在Vue实例绑定的元素内部, 那么它里面的内容将不会显示, 但是后台可以查到这个标签结点; -->
+    <!-- <template>经济法爽肤水</template> -->
+    <div id="ok">
+        <template id="id">HelloWorld</template>
+    </div>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#ok',     
+            data: {             
+            },
+            methods: {
+            }
+        });
+        var te = document.getElementById('id');
+        console.log(te);
+    </script>
+</body>
+</html>

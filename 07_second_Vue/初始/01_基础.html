@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <!-- 
+        可以看到在 Vue 构造器中有一个el 参数，它是 DOM 元素中的 id; 它是div的id;
+        这意味着我们接下来的改动全部在以上指定的 div内，div外部不受影响;
+        {{ }} 用于输出对象属性和函数返回值；
+        <a v-bind:[attributeName]="url"> ... </a>       //新式属性绑定写法
+     -->
+</head>
+<body>
+    <div id="app">
+        {{ message }}   <br>        
+        {{ data }}      <br>
+        {{ test()  }}   <br>        <!-- 调用函数 -->
+        <hr>
+        <span v-bind:title = "message1"> {{ message1 }} </span> <br>
+        <span v-bind:[URL]="url"> {{url}} </span><br>       <!-- 新式属性绑定写法 -->
+        <div v-if="isSeen">现在你看到我了</div>
+        <ul>
+            <li v-for="item in todos"> {{ item.name + item.age }} </li>
+        </ul>           <!-- 同样是响应式的，在控制台中输入app.todos.push({name:'LI',age:234})，视图将自动更新显示数据 -->
+    </div>
+    <hr>
+    <hr>
+    <div id="app1">
+        <p>{{ message }}</p>
+        <input v-model="message">
+    </div>
+    <script>
+    var app = new Vue({
+            el: '#app',     
+            data: {
+                message: 'HelloWorld',
+                data: 'beijing',
+                message1: '页面加载于' + new Date().toLocaleString(),
+                isSeen: true,
+                todos: [
+                    {name: 'Zhang', age: 10},
+                    {name: 'WAng', age: 25},
+                    {name: 'Li', age: 32},
+                ],
+                url: "我是url"
+            },
+            methods: {
+                test() {
+                    return '通过{{}}调用函数';
+                }
+            }
+        })
+        // Vue.js 的核心是一个允许采用简洁的模板语法来声明式地将数据渲染进 DOM 的系统; 
+        // 现在数据和 DOM 已经被建立了关联，所有东西都是响应式的(控制台修改app.message的值，视图将自动发生数据更新);
+        // 此时我们不再和HTML元素直接进行交互了，一个Vue应用会将其挂载到一个DOM元素上; 然后对其进行完全控制;
+        // 指令，以前缀v开始：它们会在渲染的 DOM 上应用特殊的响应式行为（打开控制台，更给app.message1的值，视图将自动更新数据）。
+        // v-bind: “将这个元素节点的 title属性 和 Vue 实例的 message1 属性 保持一致”。
+
+        // Vue 还提供了 v-model 指令，它能轻松实现表单输入和应用状态之间的双向绑定。
+        // v-model 主要作用于表单元素
+        var app1 = new Vue({
+            el: "#app1",
+            data: {
+                message: 'Hello Vue',
+            }   /* 当表单内容发生变化时候, message数据自动同步更新 */
+        })
+    </script>
+</body>
+</html>

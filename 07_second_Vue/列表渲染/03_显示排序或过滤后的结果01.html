@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+    <script src="../vue-router.js"></script>     
+    <!-- 
+        有时，我们想要显示一个数组经过过滤或排序后的版本，而不实际变更或重置原始数据。
+        在这种情况下，可以创建一个计算属性，来返回过滤或排序后的数组。
+     -->   
+</head>
+
+<body>
+    <div id="ok">
+        <li v-for="num in eventNumbers"> {{ num }}</li>
+    </div>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#ok',     
+            data: {       
+                numbers: [1,2,3,4,5]      
+            },
+            computed: {
+                eventNumbers() {
+                    return this.numbers.filter(function(num){
+                        return num % 2 === 0;
+                    })
+                }
+            }
+        });
+    </script>
+</body>
+</html>

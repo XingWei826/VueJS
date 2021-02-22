@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+    <script src="../vue-router.js"></script>        
+    <!-- 
+        监听事件: 可以用 v-on 指令监听 DOM 事件，并在触发时运行一些 JavaScript 代码。
+        事件处理方法: 然而许多事件处理逻辑会更为复杂，所以直接把 JavaScript 代码写在 v-on 指令中是不可行的。因此 v-on 还可以接收一个需要调用的方法名称。
+              <button v-on:click="greet">Greet</button>
+                    //greet是Vue实例中定义的方法
+        内联处理器中的方法:  <button v-on:click="say('hi')">Say hi</button>
+                            methods: { say: function(message) { alert(message); }}
+     -->
+</head>
+
+<body>
+    <div id="ok">
+        <h1>The button above has been clicked {{ counter }} times.</h1>
+        <button v-on:click="counter += 1">Add 1</button>
+    </div>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#ok',     
+            data: {        
+                counter: 0     
+            },
+            methods: {
+            }
+        });
+    </script>
+</body>
+</html>

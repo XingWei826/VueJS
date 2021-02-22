@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 
+             在这里我们给自定义组件绑定了一个对象，对象的值是item,
+             然后在自定义组件中通过props这个属性进行获取这个绑定的对象，然后对这个获取的对象进行操控; 
+        -->
+        <!--  todo 对象是变量，即其内容可以是动态的。 -->
+       <self-com v-for="item in shopList" v-bind:todo="item" v-bind:key="item.id"></self-com>
+    </div>
+    <script>
+    Vue.component('self-com',{       /* props就是一个存放组件中自定义属性的数组 */
+        props: ['todo'],            /* 通过此属性，我们将父作用域中的数据传到了子组件中 */
+        template:  `       
+            <li> {{ todo.text + '---id:'+ todo.id }}</li>
+        `
+    });
+        var app = new Vue({
+            el: '#app',
+            data: {
+                shopList: [
+                    {id: 0, text: '蔬菜'},
+                    {id: 1, text: '奶酪'},
+                    {id: 2, text: '酒'}
+                ]
+            } 
+        })
+        ;
+    </script>
+    <!-- 尽管这只是一个刻意设计的例子，但是我们已经设法将应用分割成了两个更小的单元。 -->
+    <!-- 子单元通过 prop 接口与父单元进行了良好的解耦。 -->
+</body>
+</html>
