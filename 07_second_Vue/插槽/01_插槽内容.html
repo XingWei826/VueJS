@@ -6,20 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="../vue.js" type="text/javascript"></script>
+    <!-- 
+        1. 插槽内可以包含任何模板代码，包括 HTML;
+        2. 如果<alert-box>的 template中没有包含一个 <slot> 元素，则该组件起始标签和结束标签之间的任何内容都会被抛弃。
+            ===> 此时如若将template中的<slot></slot>给去除了, 那么组件中的内容（比如: 存在问题,存在警告,,,）都将会被抛弃，丢掉！
+     -->
 </head>
 
 <body>
     <!-- 
-        插槽，用来插文本的槽！
-        一个预留的占位符!
+        插槽，用来插文本的槽！一个预留的占位符!
      -->
     <div id="ok">
         <!-- 组件中的内容交由slot处理渲染 -->
         <alert-box>存在问题</alert-box>
         <alert-box>存在警告</alert-box>
         <alert-box></alert-box>
-        <alert-box>
-            <span>HelloWorld</span>
+        <alert-box>         <!-- 证明插槽可以解析HTML代码-->
+            <h1>HelloWorld</h1>
             I know your name!
         </alert-box>
     </div>

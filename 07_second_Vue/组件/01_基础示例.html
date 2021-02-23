@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+    <script src="../vue-router.js"></script>  
+    <!-- 
+        【【【组件是可复用的 Vue 实例】】】，且带有一个名字：在这个例子中是 <button-counter>。
+        【【【我们可以在一个通过 new Vue 创建的 Vue 根实例中，把这个组件作为自定义元素来使用】】】
+     -->      
+
+     <!-- 
+         因为组件是可复用的 Vue 实例，所以它们与 new Vue 接收相同的选项，
+         例如 data、computed、watch、methods 以及生命周期钩子等。
+         仅有的例外是像 el 这样根实例特有的选项。
+      -->
+
+      <!-- 
+          你可以将组件进行任意次数的复用;
+          注意当点击按钮时，每个组件都会各自独立维护它的 count;
+          因为你每用一次组件，就会有一个它的新实例被创建;
+
+       -->
+
+       <!-- 
+           data 必须是一个函数;
+           当我们定义这个 <button-counter> 组件时，你可能会发现它的 data 并不是像这样直接提供一个对象：
+               data: {
+                   count: 0
+               }
+            取而代之的是，一个组件的 data 选项必须是一个函数，因此每个实例可以维护一份被返回对象的独立的拷贝：
+               data: function() {
+                   return {
+                       count: 0
+                   }
+               }
+               如果 Vue 没有这条规则，点击一个按钮就可能会像如下代码一样影响到其它所有实例：
+               也就是说，此时这几个组件共同使用count这个属性, 数据共享, 一改全改！
+        -->
+</head>
+
+<body>
+    <!-- div就是new Vue创建的根实例 -->
+    <div id="ok">
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+    </div>
+    <script type="text/javascript">
+    Vue.component('button-counter', {
+        data: function() {
+            return {
+                count: 0
+            }
+        },
+        template:`<button v-on:click="count++">you clicked me {{count}} times!</button>`
+    })
+        var vm = new Vue({
+            el: '#ok',     
+            data: {             
+            },
+            methods: {
+            }
+        });
+    </script>
+</body>
+</html>

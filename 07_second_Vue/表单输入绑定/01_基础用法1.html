@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+    <script src="../vue-router.js"></script>   
+    <!-- 
+        v-model:  双向数据绑定;
+     -->
+    <!-- 
+        你可以用 v-model 指令在表单 <input>、<textarea> 及 <select> 元素上创建双向数据绑定。
+            它会根据控件类型自动选取正确的方法来更新元素。
+            尽管有些神奇，但 v-model 本质上不过是语法糖。
+            它负责监听用户的输入事件以更新数据，并对一些极端场景进行一些特殊处理。
+     -->     
+     <!-- 
+         v-model 会忽略所有表单元素的 value、checked、selected attribute 的初始值而总是将 Vue 实例的数据作为数据来源
+         你应该通过 JavaScript 在组件的 data 选项中声明初始值。
+      -->
+      <!-- 
+          v-model 在内部为不同的输入元素使用不同的 property 并抛出不同的事件：
+                text 和 textarea 元素使用 value 属性 和 input 事件；
+                checkbox 和 radio 使用 checked 属性 和 change 事件；
+                select 字段将 value 作为 prop 并将 change 作为事件。
+       -->
+</head>
+
+<body>
+    <div id="ok">
+        <!-- 
+            此时好比说将input和message绑定在了一块 ,而且是双向绑定;
+            也就是说从input -> message 进行了绑定;
+                    从message -> input 也进行了绑定;
+                ===>  也即是双向绑定
+            此时改变input中的文本, 则会使得message同步更新;
+            那么反之, 在控制台中改变message的值, 将会立即渲染到input中国;
+        -->
+        <!-- 
+            一个疯狂的想法： <input type="text" v-model="message" placeholder="edit me">
+            你可以这样看待, 此时就将【input输入框中的文本】 与 这个message属性个绑定了起来！
+
+            <input type="checkbox" id="check" v-model="checked">
+            因为对于单个复选框来说，要么是选中，要么是没有选中，也即是在true和false之间来回切换；
+            此时通过v-model="checked" => 就是将这个框的true或false值 绑定到了checked属性上面;
+
+            其他同理;
+         -->
+        <input type="text" v-model="message" placeholder="edit me">
+        <h1>{{ message }} </h1></h1>
+        <hr>
+        <span>Multiline message is:</span>
+        <p style="white-space: pre-line;"> {{ message1 }}</p>
+        <textarea v-model="message1" placeholder="add multiple lines"></textarea>
+        <!-- 在文本区域插值 (<textarea>{{text}}</textarea>) 并不会生效，应用 v-model 来代替。 -->
+        <hr>
+    </div>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#ok',     
+            data: {             
+                message: '',
+                message1: '',
+            },
+            methods: {
+            }
+        });
+    </script>
+</body>
+</html>

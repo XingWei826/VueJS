@@ -6,35 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="../vue.js" type="text/javascript"></script>
+    <!-- 
+       有时为一个插槽设置具体的后备 (也就是默认的) 内容是很有用的，它只会在没有提供内容的时候被渲染。
+        ===》 也即是给插槽提供默认内容！
+     -->
 </head>
 
 <body>
-    <!-- 
-        插槽，用来插文本的槽！
-        一个预留的占位符!
-     -->
     <div id="ok">
-        <!-- 组件中的内容交由slot处理渲染 -->
-        <alert-box>存在问题</alert-box>
-        <alert-box>存在警告</alert-box>
+        <!-- 现在当我在一个父级组件中使用 <alert-box> 并且不提供任何插槽内容时： -->
         <alert-box></alert-box>
-        <alert-box>
-            <span>HelloWorld</span>
-            I know your name!
-        </alert-box>
+        <alert-box>我覆盖了默认的插槽内容</alert-box>
     </div>
     <script type="text/javascript">
     Vue.component('alert-box',{
         template:  `
         <div>
-            <strong>ERROR：</strong>
-            <slot>默认</slot>
+             <slot>我是默认的</slot>
         </div>
         `
     })
         var vm = new Vue({
             el: '#ok',     
-            data: {             
+            data: {           
             },
             methods: {
             }

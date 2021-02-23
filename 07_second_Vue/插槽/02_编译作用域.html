@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+    <!-- 
+        1. 当你想在一个插槽中使用数据时，例如：
+     -->
+</head>
+
+<body>
+    <!-- 
+        该插槽跟模板的其它地方一样可以访问相同的实例 property (也就是相同的“作用域”)，
+        而不能访问 <navigation-link> 的作用域。
+            例如 self 是访问不到的：
+        父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的。
+     -->
+    <div id="ok">
+        <alert-box self="i love you">
+            {{message}}
+            <!-- {{self}} -->       <!-- error -->
+        </alert-box>
+    </div>
+    <script type="text/javascript">
+    Vue.component('alert-box',{
+        template:  `
+        <div>
+             <slot></slot>
+        </div>
+        `
+    })
+        var vm = new Vue({
+            el: '#ok',     
+            data: {          
+                message: 'HelloWorld'   
+            },
+            methods: {
+            }
+        })
+    </script>
+</body>
+</html>

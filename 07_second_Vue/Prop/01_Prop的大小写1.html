@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <!--        
+        3. props属性名规则： 
+            （1）在DOM中, 如果在props中使用的是属性名的驼峰形式, 那么必须在DOM中的标签中使用该属性的短横线形式, 否则默默的失败！
+            （2）当然, 如果是在字符串模板中使用，则没有这个限制;
+     -->
+    <div id="ok">
+         <!-- props中的属性menuTitle为驼峰形式, 此时在DOM的标签中的该属性必须使用短横线形式, 否则默默的失败！！！ -->
+        <!-- <menu-item menuTitle="HelloWorld"></menu-item>     -->
+
+
+        <!-- props中的属性为驼峰形式, 此时在DOM,,,,,,使用了短横线形式, 正确！！！ -->
+        <!-- 以下两种形式均可 -->
+        <menu-item menu-title="HelloWorld"></menu-item>
+        <menu-item menu-Title="HelloWorld"></menu-item>
+    </div>
+    <script type="text/javascript">
+        Vue.component('menu-item', {
+            props: ['menuTitle'],                       /* 此处在props中的属性名使用了驼峰形式 */
+            template: '<div> {{ menuTitle }} </div>'
+        });
+        var vm = new Vue({
+            el: '#ok',
+            data: {
+            },
+            methods: {
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+    <script src="../vue-router.js"></script> 
+    <!-- 
+        1. 像这样，你已经知道了可以像这样给 prop 传入一个静态的值：
+            <blog-post title="My journey with Vue"></blog-post>
+        
+        2. 你也知道 prop 可以通过 v-bind 动态赋值，例如：
+            //动态赋予一个变量的值
+                <blog-post v-bind:title="post.title"></blog-post>
+            //动态赋予一个复杂表达式的值
+                <blog-post v-bind:title="post.title + 'by' + post.author.name"></blog-post>
+            ===>在上述两个示例中，我们传入的值都是字符串类型的，但实际上任何类型的值都可以传给一个 prop。
+     -->       
+
+     <!-- 
+         传入一个数字:  <blog-post v-bind:likes="42"></blog-post>
+         传入一个布尔值: 
+                (静)<blog-post is-published></blog-post>
+                (静)<blog-post v-bind:is-published="false"></blog-post>
+                (动态传递)<blog-post v-bind:is-published="post.isPublished"></blog-post>
+      -->
+
+      <!-- 
+          传入一个数组: 
+                (静态传递)<blog-post v-bind:comment-ids="[234, 266, 273]"></blog-post>
+                （动态传递）<blog-post v-bind:comment-ids="post.commentIds"></blog-post>
+       -->
+
+       <!-- 
+           传入一个对象：
+                    （静）<blog-post v-bind:author="{name: 'Veronica',company: 'Veridian Dynamics'}"></blog-post>
+                    (动)<blog-post v-bind:author="post.author"></blog-post>
+        -->
+
+        <!-- 
+            传入一个对象的所有 property：如果你想要将一个对象的所有 property 都作为 prop 传入，你可以使用不带参数的 v-bind (取代 v-bind:prop-name)。
+            例如，对于一个给定的对象 post：
+                   post: {
+                        id: 1,
+                        title: 'My Journey with Vue'
+                    }
+            下面的模板：
+                    <blog-post v-bind="post"></blog-post>
+            等价于：
+                    <blog-post
+                        v-bind:id="post.id"
+                        v-bind:title="post.title"
+                    ></blog-post>
+         -->
+</head>
+
+<body>
+    <div id="ok">
+
+    </div>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#ok',     
+            data: {             
+            },
+            methods: {
+            }
+        });
+    </script>
+</body>
+</html>

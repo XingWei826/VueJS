@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+    <script src="../vue-router.js"></script>        
+    <!-- 
+        1. 到这里，我们只看到了以字符串数组形式列出的 prop：
+            props: ['title', 'likes', 'isPublished', 'commentIds', 'author']
+
+        2. 但是，通常你希望每个 prop 都有指定的值类型,
+            这时，你可以以对象形式列出 prop，
+            这些 property 的名称和值分别是 prop 各自的名称和类型：
+                props: {
+                    title: String,
+                    likes: Number,
+                    isPublished: Boolean,
+                    commentIds: Array,
+                    author: Object,
+                    callback: Function,
+                    contactsPromise: Promise // or any other constructor
+                }
+            这不仅为你的组件提供了文档，还会在它们遇到错误的类型时从浏览器的 JavaScript 控制台提示用户。
+     -->
+     <!-- 
+         注意：在下面的例子中,因为props中的属性全部是驼峰, 所以标签中要使用小写短横线形式, 否则ERROR!
+         （ps: 在此处浪费诸多时间）
+      -->
+</head>
+
+<body>
+    <div id="ok">
+        <self-com
+            v-bind:prop-a="100" 
+            v-bind:prop-b="'Zhang'"
+            v-bind:prop-c="'Xing'"
+            v-bind:prop-d="24"
+            v-bind:prop-e="{name:'Wei'}"
+            v-bind:prop-f="'success'"
+            v-bind:propp="12"  
+        ></self-com>
+        <!-- 此时propp将验证不通过！ -->
+    </div>
+    <script type="text/javascript">
+    Vue.component('self-com',{
+        props: {
+            propA: Number,
+            /* propB: 多种类型 */
+            propB: [String,Number],
+            /* propC: 必传且必须是字符串 */
+            propC: {
+                type: String,
+                required: true
+            },
+            /* propD: 有默认值的数字 */
+            propD: {
+                type: Number,
+                default: 100
+            },
+            propE: {
+                type: Object,
+                default: function() {
+                    return {
+                        message: 'HelloWorld'
+                    }
+                }
+            },
+            /* 自定义验证函数 */
+            propF: {
+                validator: function(value) {    /* value是这个属性传进来的值 */
+                    return ['success','warning','danger'].indexOf(value) !== -1;
+                }
+            },
+            propp: {
+                validator: function(value) {
+                    return value > 100;
+                }
+            }
+        },
+        template: `
+        <div>
+            <p>{{propA}}</p>
+            <p>{{propB}}</p>
+            <p>{{propC}}</p>
+            <p>{{propD}}</p>
+            <p>{{propE}}</p>
+            <p>{{propF}}</p>
+            <p>{{propp}}</p>
+        </div>
+        `
+    })
+        var vm = new Vue({
+            el: '#ok',     
+            data: {             
+            },
+            methods: {
+            }
+        });
+    </script>
+</body>
+</html>

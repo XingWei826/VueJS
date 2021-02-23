@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <!--        
+        3. props属性名规则： 
+            （2）当然, 如果是在字符串模板中使用，则没有这个限制;
+     -->
+    <div id="ok">
+        <menu-item menu-title="HelloWorld"></menu-item>
+    </div>
+    <script type="text/javascript">
+        Vue.component('third-com',{
+            props: ['testTitle'],                                        /* 此处使用了驼峰形式的属性 */
+            template:'<div>{{ testTitle }}</div>'
+        })
+        Vue.component('menu-item', {
+            props: ['menuTitle'],                    
+            template: `
+            <div> 
+                {{ menuTitle }} 
+                <third-com testTitle="hello"></third-com>               /* 但是这个元素中却没有使用短横线形式, 因为这个元素是被包裹在模板字符串里的, 所以没有限制 */
+            </div>`
+        });
+        var vm = new Vue({
+            el: '#ok',
+            data: {
+            },
+            methods: {
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -5,7 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="./vue.js"></script>
+    <script src="../vue.js"></script>
+    <!-- 
+        《摘自官网》
+        Prop 是你可以在组件上注册的一些自定义 attribute。
+        当一个值传递给一个 prop attribute 的时候，它就变成了那个组件实例的一个 property。
+        一个组件默认可以拥有任意数量的 prop，任何值都可以传递给任何 prop。
+        Vue.component('blog-post', {
+            props: ['title'],
+            template: '<h3>{{ title }}</h3>'
+        });
+        在上述模板中，你会发现我们能够在组件实例中访问这个值，就像访问 data 中的值一样。
+
+        <blog-post
+        v-for="post in posts"
+        v-bind:key="post.id"
+        v-bind:title="post.title"
+        ></blog-post>
+        如上所示，你会发现我们可以使用 v-bind 来【【【动态传递 prop】】】。
+     -->
 </head>
 <body>
     <div id="app">

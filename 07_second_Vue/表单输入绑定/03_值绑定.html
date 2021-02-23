@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+    <script src="../vue-router.js"></script>   
+     <!-- 
+          摘自官网：
+          对于单选按钮，复选框及选择框(select)的选项，v-model绑定的值通常是静态字符串 (对于复选框也可以是布尔值)：
+          如下所示：
+                当选中时，`picked` 为字符串 "a"
+          <input type="radio" v-model="picked" value="a">
+
+            `toggle` 为 true 或 false
+         <input type="checkbox" v-model="toggle">
+
+            当选中第一个选项时，`selected` 为字符串 "abc"
+          <select v-model="selected">
+                <option value="abc">ABC</option>
+         </select>
+    -->     
+    <!-- 
+        但是有时我们可能想把值绑定到 Vue 实例的一个动态 property 上，
+        这时可以用 v-bind 实现，并且这个 property 的值可以不是字符串。
+        见下面案例：
+     -->
+    <!-- 
+        修饰符：
+            .lazy: 
+                在默认情况下，v-model 在每次 input 事件触发后将输入框的值与数据进行同步 (除了上述输入法组合文字时)。
+                你可以添加 lazy 修饰符，从而转为在 change 事件_之后_进行同步：
+                    在“change”时而非“input”时更新 
+                    <input v-model.lazy="msg">
+
+            .number:
+                如果想自动将用户的输入值转为数值类型，可以给 v-model 添加 number 修饰符：
+                <input v-model.number="age" type="number">
+                这通常很有用，因为即使在 type="number" 时，HTML 输入元素的值也总会返回字符串。
+                如果这个值无法被 parseFloat() 解析，则会返回原始的值。
+  
+
+            .trim:
+                如果要自动过滤用户输入的首尾空白字符，可以给 v-model 添加 trim 修饰符：
+                <input v-model.trim="msg">
+    -->
+
+    <!-- HTML 原生的输入元素类型并不总能满足需求。
+        幸好，Vue 的组件系统允许你创建具有完全自定义行为且可复用的输入组件。
+        这些输入组件甚至可以和 v-model 一起使用！ 
+    -->
+</head>
+
+<body>
+    <div id="ok">
+        <h1>复选框</h1>
+        <input id="test" type="checkbox" v-model="toggle" true-value="yes" false-value="no">
+        <label for="test"> {{toggle}} </label>
+        <!-- 
+            当选中时 => vm.toggle = 'yes' ;  
+            当没有选中时 => vm.toggle = 'no'; 
+         -->
+
+
+         <h1>单选按钮</h1>
+         <input type="radio" id="hello" v-model="pick" v-bind:value="a">
+         <label for="hello">{{pick}}</label>
+         <!-- 
+             当选中时，vm.pick == vm.a
+          -->
+
+
+          <h1>下拉框</h1>
+          <select name="" id="" v-model="selected">
+              <option value="" v-bind:value="{name: 'Zhang', age: 23}">123</option>
+          </select>
+          <!-- 
+              // 当选中时
+            typeof vm.selected        // => 'object'
+            vm.selected.age        // => 23
+           -->
+
+
+           <h1>测试number属性</h1>
+           <!-- <input type="number" v-model="age"><br>          此时解析出的age是字符串 -->
+           <input type="number" v-model.number="age"><br>   <!-- 此时解析出的age是数值 -->
+           {{ 10 + age}}  
+
+           <h1>测试lazy属性</h1>
+           <!-- <input type="text" v-model="message"><br>        当输入框中的值变化时, 可以立马同步更新message属性 -->
+           <input type="text" v-model.lazy="message">   <!-- 此时输入框中的文本变化时，不能立马同步到message属性里面，需要失焦后才能同步 -->
+           <br>message: {{message}}
+
+
+           <br></h1><h1>测试trim属性</h1>
+           <h1>尚未验证成功，留待后续验证</h1>
+           <input v-model="DATA">
+           <!-- <input v-model.trim="DATA"> -->
+           <br>DATA: {{DATA}}
+    </div>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#ok',     
+            data: {            
+                toggle: '' ,
+                pick: '',
+                a: 'helloWorld',
+                selected: '',
+                age: '',
+                message: '',
+                DATA: '                  heoo ll   sfs    '
+            },
+            methods: {
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+    <script src="../vue-router.js"></script>        
+    <!-- 
+        单个根元素：
+            当构建一个 <blog-post> 组件时，你的模板最终会包含的东西远不止一个标题：
+                template: `<h3> {{ title }} </h3>`
+            最最起码，你会包含这篇博文的正文：
+                template: 
+                `
+                <h3> {{ title  }} </h3>
+                <div v-html="content"></div>
+                `
+            然而如果你在模板中尝试这样写，Vue 会显示一个错误，
+            并解释道 every component must have a single root element (每个组件必须只有一个根元素)。
+            ======>解决方案：
+                你可以将模板的内容包裹在一个父元素内，来修复这个问题，例如：
+                template: 
+                `
+                <div class="content">
+                    <h3> {{title}} </h3>
+                    <div v-html="content"></div>
+                </div>
+                `
+     -->
+</head>
+
+<body>
+    <div id="ok">
+
+    </div>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#ok',     
+            data: {             
+            },
+            methods: {
+            }
+        });
+    </script>
+</body>
+</html>
